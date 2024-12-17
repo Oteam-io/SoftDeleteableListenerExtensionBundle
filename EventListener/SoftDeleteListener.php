@@ -42,7 +42,7 @@ class SoftDeleteListener
         $this->reader = $reader;
     }
 
-    private function getSoftDeleteAttribute(\ReflectionProperty $property, string $className): ?onSoftDelete
+    private function getSoftDeleteAttribute(EntityManager $em, \ReflectionProperty $property, string $className): ?onSoftDelete
     {
         $attributes = $property->getAttributes($className);
         if (!empty($attributes)) {
@@ -52,7 +52,22 @@ class SoftDeleteListener
             return new onSoftDelete($arguments);
         }
 
-        return (new AnnotationReader())->getPropertyAnnotation($property, onSoftDelete::class);
+        if ($this->reader) {
+            $onDelete = $this->reader->getPropertyAnnotation($property, onSoftDelete::class);
+            if ($onDelete) {
+                return $onDelete;
+            }
+        }
+
+        $meta = $em->getClassMetadata($property->getDeclaringClass()->getName());
+
+        $fieldName = $property->getName();
+        if (isset($meta->associationMappings[$fieldName]['onSoftDelete'])) {
+            $config = $meta->associationMappings[$fieldName]['onSoftDelete'];
+            return new onSoftDelete($config['type']);
+        }
+
+        return null;
     }
 
     /**
@@ -81,7 +96,7 @@ class SoftDeleteListener
             $meta = $em->getClassMetadata($namespace);
             foreach ($reflectionClass->getProperties() as $property) {
                 /** @var onSoftDelete $onDelete */
-                if ($onDelete = $this->getSoftDeleteAttribute($property, onSoftDelete::class)) {
+                if ($onDelete = $this->getSoftDeleteAttribute($em, $property, onSoftDelete::class)) {
                     $objects = null;
                     $manyToMany = null;
                     $manyToOne = null;

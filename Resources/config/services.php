@@ -6,7 +6,10 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /** @var \Symfony\Component\DependencyInjection\ContainerBuilder $container */
 $container->setDefinition('evence.softdeletale.listener.softdelete', new Definition('Evence\Bundle\SoftDeleteableExtensionBundle\EventListener\SoftDeleteListener', array(new Reference('annotation_reader', ContainerInterface::NULL_ON_INVALID_REFERENCE))))
-
 ->addTag('doctrine.event_listener', array(
     'event' => 'preSoftDelete',
+));
+
+$container->setDefinition('evence.doctrine.orm.xml_driver', new Definition(
+    'Evence\Bundle\SoftDeleteableExtensionBundle\Mapping\Driver\Xml'
 ));
