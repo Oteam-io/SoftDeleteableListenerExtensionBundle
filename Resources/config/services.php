@@ -7,7 +7,7 @@ use Doctrine\Common\Persistence\Mapping\Driver\SymfonyFileLocator;
 
 /** @var \Symfony\Component\DependencyInjection\ContainerBuilder $container */
 $container->setDefinition('evence.doctrine.orm.xml_driver', new Definition(
-    'Evence\Bundle\SoftDeleteableExtensionBundle\Mapping\Driver\XmlDriver'
+    'Evence\Bundle\SoftDeleteableExtensionBundle\Mapping\Driver\Xml'
 ))
     ->setArguments([
         new Reference('doctrine.orm.file_locator')
