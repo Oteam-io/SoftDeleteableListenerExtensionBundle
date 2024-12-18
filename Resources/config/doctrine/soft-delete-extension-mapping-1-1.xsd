@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
-           xmlns:evence="http://rubenharms.nl/schema/soft-delete-extenstion"
-           targetNamespace="http://rubenharms.nl/schema/soft-delete-extenstion">
+           xmlns:evence="http://rubenharms.nl/schema/soft-delete-extension"
+           targetNamespace="http://rubenharms.nl/schema/soft-delete-extension">
 
     <xs:element name="on-soft-delete">
         <xs:complexType>
