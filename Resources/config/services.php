@@ -17,4 +17,4 @@ $container->setDefinition('evence.doctrine.orm.xml_driver', new Definition(
         '.orm.xml'
     ]
 ))
-    ->addTag('doctrine.driver.xml');
+    ->addTag('doctrine.driver');
