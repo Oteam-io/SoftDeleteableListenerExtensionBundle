@@ -2,10 +2,10 @@
 namespace Evence\Bundle\SoftDeleteableExtensionBundle\Mapping\Driver;
 
 use Doctrine\Persistence\Mapping\Driver\FileDriver;
-use Doctrine\ORM\Mapping\Driver\XmlDriver as BaseXmlDriver;
+use Doctrine\ORM\Mapping\Driver\XmlDriver;
 use Doctrine\ORM\Mapping\MappingException;
 
-class XmlDriver extends BaseXmlDriver
+class Xml extends XmlDriver
 {
     const EVENCE_NAMESPACE = 'http://rubenharms.nl/schema/soft-delete-extension';
     const DOCTRINE_NAMESPACE_URI = 'http://doctrine-project.org/schemas/orm/doctrine-mapping';
