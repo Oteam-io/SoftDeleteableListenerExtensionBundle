@@ -9,10 +9,10 @@ use Doctrine\Common\Persistence\Mapping\Driver\SymfonyFileLocator;
 $container->setDefinition('evence.doctrine.orm.xml_driver', new Definition(
     'Evence\Bundle\SoftDeleteableExtensionBundle\Mapping\Driver\Xml'
 ))
+    ->addTag('doctrine.driver')
     ->setArguments([
-        new Reference('doctrine.orm.file_locator')
-    ])
-    ->addTag('doctrine.driver');
+        new Reference('doctrine.orm.default_entity_manager')
+    ]);
 
 $container->setDefinition('evence.softdeletale.listener.softdelete', new Definition(
     'Evence\Bundle\SoftDeleteableExtensionBundle\EventListener\SoftDeleteListener',

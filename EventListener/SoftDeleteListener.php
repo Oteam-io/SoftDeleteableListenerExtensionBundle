@@ -60,10 +60,10 @@ class SoftDeleteListener
         }
 
         $meta = $em->getClassMetadata($property->getDeclaringClass()->getName());
-
         $fieldName = $property->getName();
-        if (isset($meta->associationMappings[$fieldName]['onSoftDelete'])) {
-            $config = $meta->associationMappings[$fieldName]['onSoftDelete'];
+
+        if (isset($meta->associationMappings[$fieldName]['fields'][$fieldName]['onSoftDelete'])) {
+            $config = $meta->associationMappings[$fieldName]['fields'][$fieldName]['onSoftDelete'];
             return new onSoftDelete($config['type']);
         }
 
